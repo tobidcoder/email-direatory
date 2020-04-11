@@ -73,7 +73,11 @@
         </tr>
         @endforeach
         @else
-         No contact 
+        <div class="card">
+        <div class="card-body">
+            No contact available yet!
+        </div>
+        </div>
         @endif
     </tbody>
   </table>
