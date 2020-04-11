@@ -64,6 +64,7 @@ class UserdataController extends Controller
     public function show(userdata $userdata)
     {
         //
+        return redirect('/')->with('success', 'User data saved!');
     }
 
     /**
