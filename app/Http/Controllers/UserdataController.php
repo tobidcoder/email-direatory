@@ -42,7 +42,6 @@ class UserdataController extends Controller
         $request->validate([
             'email' =>'required|email|unique:userdatas',
             'first_name' =>'required',
-            'surname' =>''
         ]);
 
         $userdate = new Userdata([
@@ -76,6 +75,9 @@ class UserdataController extends Controller
     public function edit(userdata $userdata)
     {
         //
+        $userdatas = Userdata::find($id);
+        
+        return view('edit', compact('userdatas'));   
     }
 
     /**
@@ -88,6 +90,19 @@ class UserdataController extends Controller
     public function update(Request $request, userdata $userdata)
     {
         //
+
+        $request->validate([
+            'email' =>'required|email|unique:userdatas',
+            'first_name' =>'required',
+        ]);
+
+        $userdata = Userdata::find($id);
+        $userdata->email =  $request->get('email');
+        $userdata->first_name = $request->get('last_name');
+        $userdata->surname = $request->get('surname');
+        $contact->save();
+
+        return redirect('/')->with('success', 'User data updated!');
     }
 
     /**
