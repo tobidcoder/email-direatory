@@ -13,4 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('/', 'UserdataController');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', 'UserdataController@index')->name('index');
+Route::post('/', 'UserdataController@store')->name('store');
+Route::get('{id}/edit', 'UserdataController@edit')->name('edit');
+Route::PUT('{id}', 'UserdataController@update')->name('update');
+Route::DELETE('{id}', 'UserdataController@destroy')->name('destroy');

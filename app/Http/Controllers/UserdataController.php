@@ -15,7 +15,7 @@ class UserdataController extends Controller
     public function index()
     {
         //Showing add user data form, and user data
-        $userdatas = Userdata::all();
+        $userdatas = Userdata::orderBy('id', 'DESC')->paginate(5);
 
         return view('userdata', compact('userdatas'));
     }
@@ -40,16 +40,17 @@ class UserdataController extends Controller
     {
         //
         $request->validate([
-            'email' =>'required|email|unique:userdatas',
-            'first_name' =>'required',
+            'email' =>  'required|email|unique:userdatas',
+            'first_name' =>  'required|string',
+            'surname' => 'string'
         ]);
 
-        $userdate = new Userdata([
+        $userdata = new Userdata([
             'email' => $request->get('email'),
             'first_name' => $request->get('first_name'),
             'surname' => $request->get('surname'),
             ]);
-        $userdate->save();
+        $userdata->save();
 
         return redirect('/')->with('success', 'User data saved!');
     }
@@ -60,10 +61,10 @@ class UserdataController extends Controller
      * @param  \App\userdata  $userdata
      * @return \Illuminate\Http\Response
      */
-    public function show(userdata $userdata)
+    public function show(Userdata $userdata)
     {
         //
-        return redirect('/')->with('success', 'User data saved!');
+    
     }
 
     /**
@@ -72,12 +73,12 @@ class UserdataController extends Controller
      * @param  \App\userdata  $userdata
      * @return \Illuminate\Http\Response
      */
-    public function edit(userdata $userdata)
+    public function edit(Userdata $userdata, $id)
     {
         //
-        $userdatas = Userdata::find($id);
+        $userdata = $userdata::find($id);
         
-        return view('edit', compact('userdatas'));   
+        return view('edit', compact('userdata'));   
     }
 
     /**
@@ -87,20 +88,21 @@ class UserdataController extends Controller
      * @param  \App\userdata  $userdata
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, userdata $userdata)
+    public function update(Request $request, Userdata $userdata, $id)
     {
         //
 
         $request->validate([
-            'email' =>'required|email|unique:userdatas',
-            'first_name' =>'required',
+            'email' =>'required|email',
+            'first_name' =>'required|string',
+            'surname' => 'string'
         ]);
 
         $userdata = Userdata::find($id);
         $userdata->email =  $request->get('email');
-        $userdata->first_name = $request->get('last_name');
+        $userdata->first_name = $request->get('first_name');
         $userdata->surname = $request->get('surname');
-        $contact->save();
+        $userdata->save();
 
         return redirect('/')->with('success', 'User data updated!');
     }
@@ -111,8 +113,12 @@ class UserdataController extends Controller
      * @param  \App\userdata  $userdata
      * @return \Illuminate\Http\Response
      */
-    public function destroy(userdata $userdata)
+    public function destroy(Userdata $userdata, $id)
     {
         //
+        $userdata = Userdata::find($id);
+        $userdata->delete();
+
+        return redirect('/')->with('success', 'User details deleted!');
     }
 }

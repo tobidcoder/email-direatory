@@ -15,21 +15,29 @@
         </ul>
       </div><br />
     @endif
+    <div class="col-sm-12">
+<!-- Show success message -->
+    @if(session()->get('success'))
+        <div class="alert alert-success">
+        {{ session()->get('success') }}  
+        </div>
+    @endif
+    </div>
       <form method="post" action="{{ route('store') }}">
           @csrf
           <div class="form-group">    
               <label for="email">Email:</label>
-              <input type="email" class="form-control" name="email"/>
+              <input type="email" class="form-control" name="email" value="{{old('email')}}"/>
           </div>
 
           <div class="form-group">
               <label for="first_name">First Name:</label>
-              <input type="text" class="form-control" name="first_name"/>
+              <input type="text" class="form-control" name="first_name" value="{{old('first_name')}}"/>
           </div>
 
           <div class="form-group">
               <label for="surname">Surname:</label>
-              <input type="text" class="form-control" name="surname"/>
+              <input type="text" class="form-control" name="surname" value="{{old('surname')}}"/>
           </div>                        
           <button type="submit" class="btn btn-primary">Primary</button>
       </form>
@@ -61,7 +69,7 @@
             <td>{{$userdata->surname}}</td>
             <td>{{$userdata->first_name}}</td>
             <td>
-                <a href="{{ route('edit',$userdata->id)}}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('edit', $userdata->id)}}" class="btn btn-primary">Edit</a>
             </td>
             <td>
                 <form action="{{ route('destroy', $userdata->id)}}" method="post">
@@ -81,6 +89,7 @@
         @endif
     </tbody>
   </table>
+  {{ $userdatas->links() }}
 <div>
 </div>
 </div>
