@@ -2,7 +2,7 @@
 @section('main')
 <div class="row">
     <div class="col-sm-8 offset-sm-2">
-        <h1 class="display-3">Update a user details</h1>
+        <h1 class="display-6">Update user details</h1>
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -31,7 +31,7 @@
                 <label for="surname">Surname:</label>
                 <input type="text" class="form-control" name="surname" value={{ $userdata->surname }} />
             </div>
-            <button class="btn btn-primary" type="submit">Edit</button>
+            <button class="btn btn-primary" type="submit">Update Details</button>
         </form>
     </div>
 </div>

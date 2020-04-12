@@ -11,8 +11,7 @@
     <title>Email Directory</title>
   </head>
   <body>
-
-    <div class="container">
+    <div class="container bg-light">
         @yield('main')
     </div>
 

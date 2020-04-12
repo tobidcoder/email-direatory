@@ -4,7 +4,7 @@
 <div class="container"> 
 <div class="row">
  <div class="col-sm-6 col-md-6 offset-sm-2">
-    <h1 class="display-3">Add a contact</h1>
+    <h1 class="display-6">Add a List</h1>
   <div>
     @if ($errors->any())
       <div class="alert alert-danger">
@@ -39,24 +39,23 @@
               <label for="surname">Surname:</label>
               <input type="text" class="form-control" name="surname" value="{{old('surname')}}"/>
           </div>                        
-          <button type="submit" class="btn btn-primary">Primary</button>
+          <button type="submit" class="btn btn-primary">Create</button>
       </form>
   </div>
 </div>
 </div>
 
-<!-- Show user details -->
+<!-- Show users -->
 
 <div class="row">
 <div class="col-sm-12">
-    <h1 class="display-3">Contacts</h1>    
+    <h1 class="display-6">Users List</h1>    
   <table class="table table-striped">
     <thead>
         <tr>
           <td>No.</td>
           <td>Email</td>
-          <td>Surname</td>
-          <td>First Name</td>
+          <td>Names</td>
           <td colspan = 2>Actions</td>
         </tr>
     </thead>
@@ -66,8 +65,7 @@
         <tr>
             <td>{{$userdata->id}}</td>
             <td>{{$userdata->email}}</td>
-            <td>{{$userdata->surname}}</td>
-            <td>{{$userdata->first_name}}</td>
+            <td>{{$userdata->first_name}} {{$userdata->surname}}</td>
             <td>
                 <a href="{{ route('edit', $userdata->id)}}" class="btn btn-primary">Edit</a>
             </td>
