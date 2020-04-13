@@ -48,7 +48,7 @@
 <!-- Show users -->
 
 <div class="row">
-<div class="col-sm-12">
+<div class="col-sm-12 py-5">
     <h1 class="display-6">Users List</h1>    
   <table class="table table-striped">
     <thead>
@@ -61,9 +61,9 @@
     </thead>
     <tbody>
         @if(count($userdatas) > 0 )
-        @foreach($userdatas as $userdata)
+        @foreach($userdatas as $index => $userdata)
         <tr>
-            <td>{{$userdata->id}}</td>
+            <td>{{$index +1}}</td>
             <td>{{$userdata->email}}</td>
             <td>{{$userdata->first_name}} {{$userdata->surname}}</td>
             <td>
